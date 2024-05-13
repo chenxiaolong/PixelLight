@@ -1,0 +1,10 @@
+[versions]
+android-gradle-plugin = "8.4.0"
+jgit = "6.9.0.202403050737-r"
+
+[libraries]
+jgit = { group = "org.eclipse.jgit", name = "org.eclipse.jgit", version.ref = "jgit" }
+jgit-archive = { group = "org.eclipse.jgit", name = "org.eclipse.jgit.archive", version.ref = "jgit" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }

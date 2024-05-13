@@ -1,0 +1,23 @@
+<resources>
+    <string name="permissions_name">Request permissions</string>
+    <string name="permissions_desc">The camera permission is required to access the private Google Pixel API for using the full brightness range. The notification permission is required to keep the flashlight on in the background.</string>
+
+    <string name="notification_channel_persistent_name">Background services</string>
+    <string name="notification_channel_persistent_desc">Persistent notification required for running in the background</string>
+    <string name="notification_channel_error_name">Errors</string>
+    <string name="notification_channel_error_desc">Alerts shown when errors occur</string>
+    <string name="notification_persistent_torch_on">Flashlight is on</string>
+    <string name="notification_persistent_torch_off">Flashlight is off</string>
+    <string name="notification_action_turn_on">Turn on</string>
+    <string name="notification_action_turn_off">Turn off</string>
+    <string name="notification_error_no_permission">Camera permission is required</string>
+    <string name="notification_error_blocked_by_policy">Camera access is blocked by device policy</string>
+    <string name="notification_error_disconnected">Camera disconnected</string>
+    <string name="notification_error_device_error">Camera device failed with fatal error</string>
+    <string name="notification_error_service_error">Android camera service failed with fatal error</string>
+    <string name="notification_error_session_error">Android camera session failed with fatal error</string>
+    <string name="notification_error_in_use">Camera is currently in use by another app</string>
+    <string name="notification_error_maximum_in_use">Maximum number of cameras are already in use</string>
+    <string name="notification_error_no_valid_camera">No camera device with suitable flash found</string>
+    <string name="notification_error_unknown">Camera failed with unknown error</string>
+</resources>
