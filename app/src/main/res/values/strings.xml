@@ -1,3 +1,7 @@
+<!--
+    SPDX-FileCopyrightText: 2024 Andrew Gunnerson
+    SPDX-License-Identifier: GPL-3.0-only
+-->
 <resources>
     <string name="permissions_name">Request permissions</string>
     <string name="permissions_desc">The camera permission is required to access the private Google Pixel API for using the full brightness range. The notification permission is required to keep the flashlight on in the background.</string>

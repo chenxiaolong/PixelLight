@@ -1,3 +1,7 @@
+<!--
+    SPDX-FileCopyrightText: 2024 Andrew Gunnerson
+    SPDX-License-Identifier: GPL-3.0-only
+-->
 <resources>
     <string name="app_name" translatable="false">PixelLight</string>
 </resources>

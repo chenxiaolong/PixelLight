@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    SPDX-FileCopyrightText: 2024 Andrew Gunnerson
+    SPDX-License-Identifier: GPL-3.0-only
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-feature android:name="com.google.android.feature.PIXEL_2020_EXPERIENCE" android:required="true" />
     <uses-feature android:name="android.hardware.camera.any" android:required="true" />
