@@ -114,7 +114,7 @@ android {
 
     defaultConfig {
         applicationId = "com.chiller3.pixellight"
-        minSdk = 31
+        minSdk = 35
         targetSdk = 35
         versionCode = gitVersionCode
         versionName = gitVersionName

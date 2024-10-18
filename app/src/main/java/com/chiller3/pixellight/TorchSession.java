@@ -5,7 +5,6 @@
 
 package com.chiller3.pixellight;
 
-import android.app.Notification;
 import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
@@ -31,19 +30,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.RejectedExecutionException;
 
 /**
- * A singleton instance to manage the lifecycle of the torch. The lifecycle begins when the torch
- * is turned on and ends when it turns off.
- * <p>
- * Due to Android 14's restrictions on while-in-use permissions, calling
- * {@link android.app.Service#startForeground(int, Notification, int)} with the camera foreground
- * service type is blocked unless the activity is visible or the service was started by the system.
- * The list of rules can be found in ActiveServices.shouldAllowFgsWhileInUsePermissionLocked() in
- * AOSP's source code.
- * <p>
- * This means that {@link TorchTileService} cannot simply bind to {@link TorchService} and use it.
- * Whichever service attaches to the session first becomes the owner and is responsible for moving
- * to and from the foreground as well as sending error notifications. The primary owner must run for
- * as long as the torch is on and any additional owners are attached.
+ * A type to manage the lifecycle of the torch. The lifecycle begins when the torch is turned on and
+ * ends when it turns off.
  */
 public class TorchSession {
     private enum State {
@@ -57,8 +45,7 @@ public class TorchSession {
     // Things following the object lifecycle.
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
     private final HashSet<Listener> listeners = new HashSet<>();
-    private ServiceOwner primaryOwner = null;
-    private final HashSet<ServiceOwner> additionalOwners = new HashSet<>();
+    private final ServiceOwner serviceOwner;
     private final CameraManager cameraManager;
     private final HandlerThread cameraThread = new HandlerThread("CameraThread");
     private final Handler cameraHandler;
@@ -112,20 +99,9 @@ public class TorchSession {
                 }
             };
 
-    private static TorchSession INSTANCE;
+    public TorchSession(@NonNull Context context, @NonNull ServiceOwner owner) {
+        serviceOwner = owner;
 
-    public static @NonNull TorchSession getInstance(@NonNull Context context) {
-        synchronized (TorchSession.class) {
-            if (INSTANCE == null) {
-                // The context is not stored.
-                INSTANCE = new TorchSession(context);
-            }
-
-            return INSTANCE;
-        }
-    }
-
-    private TorchSession(@NonNull Context context) {
         cameraThread.start();
         cameraHandler = new Handler(cameraThread.getLooper());
 
@@ -164,66 +140,21 @@ public class TorchSession {
         }
     }
 
-    @MainThread
-    public void registerServiceOwner(@NonNull ServiceOwner serviceOwner) {
-        if (primaryOwner == null) {
-            Log.d(TAG, "Registered service owner: " + serviceOwner);
-            primaryOwner = serviceOwner;
-        } else {
-            Log.d(TAG, "Registering additional owner: " + serviceOwner);
-            additionalOwners.add(serviceOwner);
-
-            // The primary owner must stay alive until all additional owners are unregistered.
-            notifyOwnerNeeded();
-        }
-    }
-
-    @MainThread
-    public void unregisterServiceOwner(@NonNull ServiceOwner serviceOwner) {
-        if (primaryOwner == serviceOwner) {
-            Log.d(TAG, "Unregistering service owner: " + serviceOwner);
-
-            if (curBrightness != 0) {
-                throw new IllegalStateException("Unregistering service owner while torch is on");
-            } else if (!additionalOwners.isEmpty()) {
-                throw new IllegalStateException(
-                        "Unregistering service owners while additional owners exist");
-            }
-
-            primaryOwner = null;
-        } else {
-            Log.d(TAG, "Unregistering additional owner: " + serviceOwner);
-            if (!additionalOwners.remove(serviceOwner)) {
-                Log.w(TAG, "Owner was never registered: " + serviceOwner);
-            }
-
-            // The primary owner might be able to leave foreground mode if there are no more
-            // additional owners.
-            tryNotifyOwnerNotNeeded();
-        }
-    }
-
-    @MainThread
-    public boolean isServiceOwner(@NonNull ServiceOwner serviceOwner) {
-        return primaryOwner == serviceOwner;
-    }
-
     public boolean isOwnerNeeded() {
-        return state != State.OFF || !additionalOwners.isEmpty();
+        return state != State.OFF;
     }
 
     private void notifyOwnerNeeded() {
         Log.d(TAG, "Notifying primary owner that foreground mode is needed");
-        primaryOwner.onTorchOwnerNeeded(true, state != State.OFF);
+        serviceOwner.onTorchOwnerNeeded(true, state != State.OFF);
     }
 
     private void tryNotifyOwnerNotNeeded() {
         if (isOwnerNeeded()) {
-            Log.d(TAG, "Foreground mode is still needed: state=" + state
-                    + ", additionalOwners=" + additionalOwners.size());
+            Log.d(TAG, "Foreground mode is still needed: state=" + state);
         } else {
             Log.d(TAG, "Notifying primary owner that foreground mode is not needed");
-            primaryOwner.onTorchOwnerNeeded(false, false);
+            serviceOwner.onTorchOwnerNeeded(false, false);
         }
     }
 

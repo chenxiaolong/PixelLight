@@ -17,7 +17,8 @@ It allows access to the same brightness levels as Google Magnifier, except witho
 
 ## Limitations
 
-* If the flashlight is turned off, but the quick settings tile was recently visible, it may take ~20 seconds for PixelLight's notification to disappear. This is a side effect of a workaround for Android 14's foreground service restrictions and cannot be fixed.
+* Only supports Android 15+. For Android 12-14, use the old PixelLight 1.0 release, which has a better user experience due to fewer Android restrictions.
+* On Android 15, the quick settings tile requires unlocking the device when used on the lock screen. The quick settings panel will also close when tapping on the tile. These are not fixable due to Android 15's new restrictions on starting foreground services.
 
 ## Permissions
 
