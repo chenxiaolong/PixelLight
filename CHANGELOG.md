@@ -7,7 +7,7 @@
     to update the actual links at the bottom of the file.
 -->
 
-### Unreleased
+### Version 2.0
 
 * Add support for (only) Android 15 ([Issue #3], [PR #4])
     * Due to new Android restrictions, the user experience for the quick settings tile is worse now. On the lock screen, the tile now requires unlocking the device. Tapping the tile will also always close the quick settings panel.
