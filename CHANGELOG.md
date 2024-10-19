@@ -14,6 +14,7 @@
     * Support for Android 12-14 has been removed to simplify the code. Android 14, in particular, required some nasty workarounds to make the quick settings tile work well. For older Android versions, continue using PixelLight 1.0.
 * Update checksum for `tensorflow-lite-metadata-0.1.0-rc2.pom` dependency ([PR #1])
 * Target API 35 ([PR #2])
+* Update build script dependencies ([PR #5])
 
 ### Version 1.0
 
@@ -24,3 +25,4 @@
 [PR #1]: https://github.com/chenxiaolong/PixelLight/pull/1
 [PR #2]: https://github.com/chenxiaolong/PixelLight/pull/2
 [PR #4]: https://github.com/chenxiaolong/PixelLight/pull/4
+[PR #5]: https://github.com/chenxiaolong/PixelLight/pull/5
