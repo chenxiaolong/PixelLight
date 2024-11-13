@@ -7,6 +7,10 @@
     to update the actual links at the bottom of the file.
 -->
 
+### Unreleased
+
+* Enable predictive back gestures ([PR #6])
+
 ### Version 2.0
 
 * Add support for (only) Android 15 ([Issue #3], [PR #4])
@@ -26,3 +30,4 @@
 [PR #2]: https://github.com/chenxiaolong/PixelLight/pull/2
 [PR #4]: https://github.com/chenxiaolong/PixelLight/pull/4
 [PR #5]: https://github.com/chenxiaolong/PixelLight/pull/5
+[PR #6]: https://github.com/chenxiaolong/PixelLight/pull/6
