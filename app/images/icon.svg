@@ -7,13 +7,16 @@
 
     <!--
         Make this match the Android icon exactly. Android adaptive icons take the inner (centered)
-        2/3rds of the foreground's viewport and crop out the rest [1]. Our foreground drawable is
-        scaled to 40% of its 960px viewport. So in this SVG viewport, it'll take up 40% of 150%,
-        which is 60% with 20% of 960px for the padding on all 4 sides.
+        2/3rds of the foreground's viewbox and crop out the rest [1].
+
+        ic_foreground is at 1/2 scale and then cropped to 2/3rds of the original viewbox, so it
+        takes up (1/2) / (2/3) = 3/4 of the cropped viewbox. In this SVG version, we don't crop.
+        Instead, the full size icon is scaled down to 3/4 to match.
 
         [1] https://cs.android.com/android/platform/superproject/+/android-13.0.0_r31:frameworks/base/graphics/java/android/graphics/drawable/AdaptiveIconDrawable.java;l=106
     -->
-    <g transform="translate(192 -192) scale(0.6 0.6)">
+
+    <g transform-origin="480 -480" transform="scale(0.75 0.75)">
         <path
             fill="#ffffff"
             d="M320-80v-440l-80-120v-240h480v240l-80 120v440H320Zm160-260q-25 0-42.5-17.5T420-400q0-25 17.5-42.5T480-460q25 0 42.5 17.5T540-400q0 25-17.5 42.5T480-340ZM320-760h320v-40H320v40Zm320 80H320v16l80 120v384h160v-384l80-120v-16ZM480-480Z" />
