@@ -10,7 +10,7 @@
 ### Unreleased
 
 * Enable predictive back gestures ([PR #6])
-* Fix incorrect scale factor in icon ([PR #7])
+* Fix incorrect scale factor in icon and rebase off latest material flashlight icon ([PR #7], [PR #8])
 
 ### Version 2.0
 
@@ -33,3 +33,4 @@
 [PR #5]: https://github.com/chenxiaolong/PixelLight/pull/5
 [PR #6]: https://github.com/chenxiaolong/PixelLight/pull/6
 [PR #7]: https://github.com/chenxiaolong/PixelLight/pull/7
+[PR #8]: https://github.com/chenxiaolong/PixelLight/pull/8
