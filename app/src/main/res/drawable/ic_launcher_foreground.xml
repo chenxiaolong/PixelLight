@@ -9,7 +9,6 @@
         android:scaleY="0.5"
         android:pivotX="480"
         android:pivotY="-480"
-        android:translateX="0"
         android:translateY="960">
         <path
             android:fillColor="@android:color/white"
