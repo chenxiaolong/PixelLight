@@ -1,0 +1,9 @@
+<!--
+    SPDX-FileCopyrightText: 2024 Andrew Gunnerson
+    SPDX-License-Identifier: GPL-3.0-only
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/keep_service_alive"
+        android:title="@string/menu_keep_service_alive"
+        android:checkable="true" />
+</menu>

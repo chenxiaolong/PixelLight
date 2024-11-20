@@ -20,6 +20,8 @@ It allows access to the same brightness levels as Google Magnifier, except witho
 * Only supports Android 15+. For Android 12-14, use the old PixelLight 1.0 release, which has a better user experience due to fewer Android restrictions.
 * On Android 15, the quick settings tile requires unlocking the device when used on the lock screen. The quick settings panel will also close when tapping on the tile. These are not fixable due to Android 15's new restrictions on starting foreground services.
 
+  However, if the "Keep service alive" option is enabled, then these restrictions only apply the first time the tile is toggled after a reboot. This keeps the foreground service running indefinitely, but does not impact battery life because the service is completely idle and not executing any code. The mandatory notification can be disabled from Android's settings if desired.
+
 ## Permissions
 
 The `CAMERA` permission is required because Pixel's private API for high brightness modes is only accessible when using the camera as a camera, not when using the camera as a flashlight with the official Android 13+ APIs. Internally, PixelLight is taking a picture every time the flashlight is turned on or the brightness is changed. These exist only in memory and are never saved to disk.

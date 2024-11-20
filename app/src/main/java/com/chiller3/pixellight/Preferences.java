@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 
 public class Preferences {
     private static final String PREF_BRIGHTNESS = "brightness";
+    private static final String PREF_KEEP_SERVICE_ALIVE = "keep_service_alive";
 
     private final SharedPreferences prefs;
 
@@ -26,5 +27,13 @@ public class Preferences {
 
     public void setBrightness(int value) {
         prefs.edit().putInt(PREF_BRIGHTNESS, value).apply();
+    }
+
+    public boolean getKeepServiceAlive() {
+        return prefs.getBoolean(PREF_KEEP_SERVICE_ALIVE, false);
+    }
+
+    public void setKeepServiceAlive(boolean keep) {
+        prefs.edit().putBoolean(PREF_KEEP_SERVICE_ALIVE, keep).apply();
     }
 }

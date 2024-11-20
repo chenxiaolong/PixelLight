@@ -85,12 +85,18 @@ public class TorchTileService extends TileService implements ServiceConnection, 
             newBrightness = 0;
         }
 
-        final var serviceIntent = TorchService.createSetBrightnessIntent(this, newBrightness);
-        final var intent = FgsLauncherActivity.createIntent(this, serviceIntent);
+        if (torchBinder.isInForeground()) {
+            // With Android 15, we can't start a camera foreground service from a tile service
+            // anymore, but we can connect to a previously started instance just fine.
+            torchBinder.setTorchBrightness(newBrightness);
+        } else {
+            final var serviceIntent = TorchService.createSetBrightnessIntent(this, newBrightness);
+            final var intent = FgsLauncherActivity.createIntent(this, serviceIntent);
 
-        startActivityAndCollapse(PendingIntent.getActivity(
-                this, 0, intent,
-                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT));
+            startActivityAndCollapse(PendingIntent.getActivity(
+                    this, 0, intent,
+                    PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT));
+        }
 
         // The tile state will be changed when onTorchStateChanged() is called.
     }

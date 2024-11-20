@@ -38,6 +38,7 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
     private int curBrightness = -1;
     private int maxBrightness = -1;
     private boolean initialUpdate = true;
+    private boolean foreground = false;
 
     public static @NonNull Intent createSetBrightnessIntent(
             @NonNull Context context, int brightness) {
@@ -120,6 +121,8 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
                 message, Collections.singletonList(new Pair<>(actionText, actionIntent)));
         final var type = ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA;
         startForeground(Notifications.ID_PERSISTENT, notification, type);
+
+        foreground = true;
     }
 
     private void setTorchBrightness(int brightness) {
@@ -133,9 +136,13 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
         final var ownerNeeded = session.isOwnerNeeded();
         Log.d(TAG, "Attempting to stop service: ownerNeeded=" + ownerNeeded);
 
-        if (!ownerNeeded) {
+        if (prefs.getKeepServiceAlive()) {
+            Log.d(TAG, "Keeping service alive indefinitely");
+        } else if (!ownerNeeded) {
             Log.d(TAG, "Stopping foreground service");
             stopForeground(Service.STOP_FOREGROUND_REMOVE);
+
+            foreground = false;
 
             Log.d(TAG, "Stopping service");
             stopSelf();
@@ -195,6 +202,16 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
         @MainThread
         public void refreshCameras() {
             session.refreshCameras();
+        }
+
+        @MainThread
+        public boolean isInForeground() {
+            return foreground;
+        }
+
+        @MainThread
+        public void tryStopService() {
+            TorchService.this.tryStopService();
         }
     }
 }

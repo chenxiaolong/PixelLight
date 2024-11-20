@@ -13,6 +13,8 @@ import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
@@ -50,6 +52,33 @@ public class MainActivity extends Activity implements ServiceConnection, TorchSe
 
         binding.requestPermissions.setOnClickListener(v ->
             requestPermissions(Permissions.REQUIRED, REQUEST_PERMISSIONS));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity_options, menu);
+
+        menu.findItem(R.id.keep_service_alive).setChecked(prefs.getKeepServiceAlive());
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.keep_service_alive) {
+            item.setChecked(!item.isChecked());
+            prefs.setKeepServiceAlive(item.isChecked());
+
+            if (!item.isChecked() && torchBinder != null) {
+                // Try to shut down the service so that the user doesn't have to manually turn the
+                // torch on and off for the change to take effect.
+                torchBinder.tryStopService();
+            }
+
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
