@@ -11,6 +11,8 @@
 
 * Enable predictive back gestures ([PR #6])
 * Fix incorrect scale factor in icon and rebase off latest material flashlight icon ([PR #7], [PR #8])
+* Add new option to keep the foreground service alive ([Issue #9], [PR #10])
+  * This is a partial bypass for Android 15's restrictions. When the option is enabled, the quick settings tile works on the lock screen again (without unlocking the device first) and the quick settings panel no longer auto-closes. However, this only works after the tile has been toggled once after each reboot.
 
 ### Version 2.0
 
@@ -27,6 +29,7 @@
 
 <!-- Do not manually edit the lines below. Use `./gradlew changelogUpdateLinks` to regenerate. -->
 [Issue #3]: https://github.com/chenxiaolong/PixelLight/issues/3
+[Issue #9]: https://github.com/chenxiaolong/PixelLight/issues/9
 [PR #1]: https://github.com/chenxiaolong/PixelLight/pull/1
 [PR #2]: https://github.com/chenxiaolong/PixelLight/pull/2
 [PR #4]: https://github.com/chenxiaolong/PixelLight/pull/4
@@ -34,3 +37,4 @@
 [PR #6]: https://github.com/chenxiaolong/PixelLight/pull/6
 [PR #7]: https://github.com/chenxiaolong/PixelLight/pull/7
 [PR #8]: https://github.com/chenxiaolong/PixelLight/pull/8
+[PR #10]: https://github.com/chenxiaolong/PixelLight/pull/10
