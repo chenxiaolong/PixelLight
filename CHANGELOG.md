@@ -13,6 +13,7 @@
 * Fix incorrect scale factor in icon and rebase off latest material flashlight icon ([PR #7], [PR #8])
 * Add new option to keep the foreground service alive ([Issue #9], [PR #10])
   * This is a partial bypass for Android 15's restrictions. When the option is enabled, the quick settings tile works on the lock screen again (without unlocking the device first) and the quick settings panel no longer auto-closes. However, this only works after the tile has been toggled once after each reboot.
+* Update build script dependencies ([PR #11])
 
 ### Version 2.0
 
@@ -38,3 +39,4 @@
 [PR #7]: https://github.com/chenxiaolong/PixelLight/pull/7
 [PR #8]: https://github.com/chenxiaolong/PixelLight/pull/8
 [PR #10]: https://github.com/chenxiaolong/PixelLight/pull/10
+[PR #11]: https://github.com/chenxiaolong/PixelLight/pull/11
