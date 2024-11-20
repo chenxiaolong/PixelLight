@@ -7,7 +7,7 @@
     to update the actual links at the bottom of the file.
 -->
 
-### Unreleased
+### Version 2.1
 
 * Enable predictive back gestures ([PR #6])
 * Fix incorrect scale factor in icon and rebase off latest material flashlight icon ([PR #7], [PR #8])
