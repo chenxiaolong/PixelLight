@@ -7,7 +7,7 @@
     to update the actual links at the bottom of the file.
 -->
 
-### Unreleased
+### Version 2.2
 
 * Avoid needing to unlock the device when turning the flashlight on while locked ([Issue #12], [PR #13])
 * Add support for toggling flashlight from other apps ([Issue #12], [PR #13])
