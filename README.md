@@ -18,9 +18,9 @@ It allows access to the same brightness levels as Google Magnifier, except witho
 ## Limitations
 
 * Only supports Android 15+. For Android 12-14, use the old PixelLight 1.0 release, which has a better user experience due to fewer Android restrictions.
-* On Android 15, the quick settings tile requires unlocking the device when used on the lock screen. The quick settings panel will also close when tapping on the tile. These are not fixable due to Android 15's new restrictions on starting foreground services.
+* On Android 15, the quick settings panel will close when tapping the tile to turn on the flashlight. Additionally, on the lock screen, the background will turn black until the status bar is tapped. These issues are not fixable due to Android 15's new restrictions on starting foreground services.
 
-  However, if the "Keep service alive" option is enabled, then these restrictions only apply the first time the tile is toggled after a reboot. This keeps the foreground service running indefinitely, but does not impact battery life because the service is completely idle and not executing any code. The mandatory notification can be disabled from Android's settings if desired.
+  However, if the "Keep service alive" option is enabled, then these issues only happens the first time the tile is toggled after a reboot. This keeps the foreground service running indefinitely, but does not impact battery life because the service is completely idle and not executing any code. The mandatory notification can be disabled from Android's settings if desired.
 
 ## Permissions
 
@@ -29,6 +29,44 @@ The `CAMERA` permission is required because Pixel's private API for high brightn
 The `FOREGROUND_SERVICE` and `POST_NOTIFICATIONS` permissions are required to allow the flashlight to remain on while the app is in the background. They are also required for the quick settings tile to work.
 
 PixelLight does not and will never have the `INTERNET` permission.
+
+## External control
+
+An external app can change the flashlight state by launching PixelLight's `ToggleActivity` via an intent. By default, this will toggle the flashlight state between on and off.
+
+This activity accepts an optional integer parameter named `brightness`:
+
+* If the value is -2, the flashlight is toggled between on (at the user's saved brightness) and off. This is the default behavior when the parameter is not specified.
+* If the value is -1, the flashlight is turned on at the user's saved brightness.
+* If the value is 0, the flashlight is turned off.
+* If the value is positive, the flashlight is turned on at the specified brightness. If the value is out of range, it is automatically clamped to the maximum brightness. This does not change the user's brightness preference.
+* If the value is anything else, the intent is ignored.
+
+## Lock screen shortcut
+
+Android currently has no builtin way to set custom lock screen shortcuts. To use PixelLight in a lock screen shortcut, the system QR code scanner app must be overridden to point to PixelLight's `ToggleActivity`:
+
+```bash
+adb shell device_config override systemui default_qr_code_scanner com.chiller3.pixellight/.ToggleActivity
+```
+
+After rebooting, the QR code scanner lock screen shortcut and quick settings tile will toggle the flashlight instead of launching the system QR code scanner app.
+
+To change this setting back to the default, run:
+
+```bash
+adb shell device_config clear_override systemui default_qr_code_scanner
+```
+
+and reboot.
+
+The current setting can be found with:
+
+```bash
+adb shell device_config get systemui default_qr_code_scanner
+```
+
+`null` means the QR code scanner is not overridden.
 
 ## Verifying digital signatures
 

@@ -42,6 +42,9 @@ public class TorchSession {
 
     private static final String TAG = TorchSession.class.getSimpleName();
 
+    public static final int BRIGHTNESS_TOGGLE = -2;
+    public static final int BRIGHTNESS_PERSISTED = -1;
+
     // Things following the object lifecycle.
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
     private final HashSet<Listener> listeners = new HashSet<>();
@@ -59,6 +62,7 @@ public class TorchSession {
     };
     private final SurfaceTexture surfaceTexture = new SurfaceTexture(0);
     private final Surface surface = new Surface(surfaceTexture);
+    private final Preferences prefs;
 
     // Things following the torch lifecycle.
     private State state = State.OFF;
@@ -106,6 +110,8 @@ public class TorchSession {
         cameraHandler = new Handler(cameraThread.getLooper());
 
         cameraManager = context.getSystemService(CameraManager.class);
+
+        prefs = new Preferences(context);
     }
 
     @Override
@@ -204,7 +210,26 @@ public class TorchSession {
     @MainThread
     public void setTorchBrightness(int brightness) {
         Log.d(TAG, "User requesting brightness of " + brightness);
-        desiredBrightness = Math.min(brightness, maxBrightness);
+
+        if (brightness >= 0) {
+            desiredBrightness = brightness;
+        } else if (brightness == BRIGHTNESS_PERSISTED) {
+            desiredBrightness = prefs.getBrightness(maxBrightness);
+        } else if (brightness == BRIGHTNESS_TOGGLE) {
+            switch (state) {
+                case OFF:
+                    desiredBrightness = prefs.getBrightness(maxBrightness);
+                    break;
+                case ACTIVATING, ON:
+                    desiredBrightness = 0;
+                    break;
+            }
+        } else {
+            Log.w(TAG, "Ignoring invalid brightness value: " + brightness);
+            return;
+        }
+
+        desiredBrightness = Math.min(desiredBrightness, maxBrightness);
 
         if (desiredBrightness == 0) {
             closeCamera();

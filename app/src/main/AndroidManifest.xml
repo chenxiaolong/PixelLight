@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    SPDX-FileCopyrightText: 2024 Andrew Gunnerson
+    SPDX-FileCopyrightText: 2024-2025 Andrew Gunnerson
     SPDX-License-Identifier: GPL-3.0-only
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
@@ -31,9 +31,11 @@
             </intent-filter>
         </activity>
 
+        <!-- This is exported. Do not rename. -->
         <activity
-            android:name=".FgsLauncherActivity"
-            android:exported="false"
+            android:name=".ToggleActivity"
+            android:exported="true"
+            android:showWhenLocked="true"
             android:taskAffinity=""
             android:theme="@style/android:Theme.NoDisplay" />
 

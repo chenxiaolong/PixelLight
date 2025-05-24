@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2024 Andrew Gunnerson
+ * SPDX-FileCopyrightText: 2024-2025 Andrew Gunnerson
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
@@ -36,7 +36,6 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
     private Preferences prefs;
     private Notifications notifications;
     private int curBrightness = -1;
-    private int maxBrightness = -1;
     private boolean initialUpdate = true;
     private boolean foreground = false;
 
@@ -94,8 +93,8 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
         final var action = intent != null ? intent.getAction() : null;
 
         if (ACTION_SET_BRIGHTNESS.equals(action)) {
-            final var brightness = intent.getIntExtra(EXTRA_BRIGHTNESS, -1);
-            setTorchBrightness(brightness);
+            final var brightness = intent.getIntExtra(EXTRA_BRIGHTNESS, TorchSession.BRIGHTNESS_TOGGLE);
+            session.setTorchBrightness(brightness);
         } else if (ACTION_PERSIST.equals(action)) {
             Log.d(TAG, "Keeping service alive");
         } else {
@@ -103,7 +102,7 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
             tryStopService();
         }
 
-        return Service.START_NOT_STICKY;
+        return START_NOT_STICKY;
     }
 
     private void updateForegroundNotification() {
@@ -115,7 +114,7 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
         final var actionText = curBrightness > 0
                 ? R.string.notification_action_turn_off
                 : R.string.notification_action_turn_on;
-        final var actionBrightness = curBrightness > 0 ? 0 : -1;
+        final var actionBrightness = curBrightness > 0 ? 0 : TorchSession.BRIGHTNESS_PERSISTED;
         final var actionIntent = createSetBrightnessIntent(this, actionBrightness);
         final var notification = notifications.createPersistentNotification(
                 message, Collections.singletonList(new Pair<>(actionText, actionIntent)));
@@ -123,13 +122,6 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
         startForeground(Notifications.ID_PERSISTENT, notification, type);
 
         foreground = true;
-    }
-
-    private void setTorchBrightness(int brightness) {
-        if (brightness < 0) {
-            brightness = prefs.getBrightness(maxBrightness);
-        }
-        session.setTorchBrightness(brightness);
     }
 
     public void tryStopService() {
@@ -169,7 +161,6 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
     @Override
     public void onTorchStateChanged(int curBrightness, int maxBrightness) {
         this.curBrightness = curBrightness;
-        this.maxBrightness = maxBrightness;
 
         if (initialUpdate) {
             initialUpdate = false;
@@ -196,7 +187,7 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
 
         @MainThread
         public void setTorchBrightness(int brightness) {
-            TorchService.this.setTorchBrightness(brightness);
+            session.setTorchBrightness(brightness);
         }
 
         @MainThread

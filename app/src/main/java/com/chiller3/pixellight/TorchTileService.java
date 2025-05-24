@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2024 Andrew Gunnerson
+ * SPDX-FileCopyrightText: 2024-2025 Andrew Gunnerson
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
@@ -79,7 +79,7 @@ public class TorchTileService extends TileService implements ServiceConnection, 
             return;
         } else if (curBrightness == 0) {
             Log.d(TAG, "Toggling torch on");
-            newBrightness = -1;
+            newBrightness = TorchSession.BRIGHTNESS_PERSISTED;
         } else {
             Log.d(TAG, "Toggling torch off");
             newBrightness = 0;
@@ -90,8 +90,7 @@ public class TorchTileService extends TileService implements ServiceConnection, 
             // anymore, but we can connect to a previously started instance just fine.
             torchBinder.setTorchBrightness(newBrightness);
         } else {
-            final var serviceIntent = TorchService.createSetBrightnessIntent(this, newBrightness);
-            final var intent = FgsLauncherActivity.createIntent(this, serviceIntent);
+            final var intent = ToggleActivity.createIntent(this, newBrightness);
 
             startActivityAndCollapse(PendingIntent.getActivity(
                     this, 0, intent,
