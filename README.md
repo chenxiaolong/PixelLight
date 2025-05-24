@@ -120,4 +120,4 @@ However, aside from that, PixelLight will only ever support Google Pixel devices
 
 ## License
 
-PixelLight itself is licensed under GPLv3. Please see [`LICENSE`](./LICENSE) for the full license text.
+PixelLight is licensed under GPLv3. Please see [`LICENSE`](./LICENSE) for the full license text.
