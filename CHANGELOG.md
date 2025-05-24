@@ -13,6 +13,7 @@
 * Add support for toggling flashlight from other apps ([Issue #12], [PR #13])
     * See the [documentation](./README.md#external-control) for details on which intents are accepted.
     * This also allows [toggling the flashlight](./README.md#lock-screen-shortcut) via a lock screen shortcut.
+* Update build script dependencies ([PR #14])
 
 ### Version 2.1
 
@@ -49,3 +50,4 @@
 [PR #10]: https://github.com/chenxiaolong/PixelLight/pull/10
 [PR #11]: https://github.com/chenxiaolong/PixelLight/pull/11
 [PR #13]: https://github.com/chenxiaolong/PixelLight/pull/13
+[PR #14]: https://github.com/chenxiaolong/PixelLight/pull/14
