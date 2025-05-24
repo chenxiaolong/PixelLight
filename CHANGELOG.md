@@ -7,6 +7,13 @@
     to update the actual links at the bottom of the file.
 -->
 
+### Unreleased
+
+* Avoid needing to unlock the device when turning the flashlight on while locked ([Issue #12], [PR #13])
+* Add support for toggling flashlight from other apps ([Issue #12], [PR #13])
+    * See the [documentation](./README.md#external-control) for details on which intents are accepted.
+    * This also allows [toggling the flashlight](./README.md#lock-screen-shortcut) via a lock screen shortcut.
+
 ### Version 2.1
 
 * Enable predictive back gestures ([PR #6])
@@ -31,6 +38,7 @@
 <!-- Do not manually edit the lines below. Use `./gradlew changelogUpdateLinks` to regenerate. -->
 [Issue #3]: https://github.com/chenxiaolong/PixelLight/issues/3
 [Issue #9]: https://github.com/chenxiaolong/PixelLight/issues/9
+[Issue #12]: https://github.com/chenxiaolong/PixelLight/issues/12
 [PR #1]: https://github.com/chenxiaolong/PixelLight/pull/1
 [PR #2]: https://github.com/chenxiaolong/PixelLight/pull/2
 [PR #4]: https://github.com/chenxiaolong/PixelLight/pull/4
@@ -40,3 +48,4 @@
 [PR #8]: https://github.com/chenxiaolong/PixelLight/pull/8
 [PR #10]: https://github.com/chenxiaolong/PixelLight/pull/10
 [PR #11]: https://github.com/chenxiaolong/PixelLight/pull/11
+[PR #13]: https://github.com/chenxiaolong/PixelLight/pull/13
