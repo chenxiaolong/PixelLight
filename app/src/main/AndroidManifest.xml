@@ -36,8 +36,14 @@
             android:name=".ToggleActivity"
             android:exported="true"
             android:showWhenLocked="true"
+            android:turnScreenOn="true"
             android:taskAffinity=""
-            android:theme="@style/android:Theme.NoDisplay" />
+            android:theme="@style/android:Theme.NoDisplay">
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_NOTE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".TorchService"

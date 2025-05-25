@@ -13,6 +13,7 @@ It allows access to the same brightness levels as Google Magnifier, except witho
 
 * Supports entire brightness range
 * Quick settings tile
+* [Lock screen shortcut](#lock-screen-shortcut)
 * Tiny APK with no dependencies
 
 ## Limitations
@@ -44,7 +45,19 @@ This activity accepts an optional integer parameter named `brightness`:
 
 ## Lock screen shortcut
 
-Android currently has no builtin way to set custom lock screen shortcuts. To use PixelLight in a lock screen shortcut, the system QR code scanner app must be overridden to point to PixelLight's `ToggleActivity`:
+Android currently has no builtin way to set custom lock screen shortcuts. To use PixelLight with a lock screen shortcut, it's necessary to either set it as the default note taking app or override the QR code scanner shortcut. The note taking app approach is preferred since it doesn't result in janky animations or black screen issues.
+
+### Set as default note taking app
+
+Android currently doesn't enable the note taking app role by default. It must first be enabled via the `Force enable Notes role` setting in Android's developer options (underneath the `Apps` heading).
+
+Then, reboot and set PixelLight as the default note taking app in Android's Settings -> Apps -> Default apps -> Notes app.
+
+The `Note-taking` lock screen shortcut will now launch PixelLight.
+
+### Override QR code scanner
+
+Run:
 
 ```bash
 adb shell device_config override systemui default_qr_code_scanner com.chiller3.pixellight/.ToggleActivity
