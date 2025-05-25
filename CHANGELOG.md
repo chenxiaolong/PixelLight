@@ -7,7 +7,7 @@
     to update the actual links at the bottom of the file.
 -->
 
-### Unreleased
+### Version 2.3
 
 * Pretend to be a note-taking app ([Issue #12], [PR #15])
   * This is a better approach for toggling the flashlight via a lock screen shortcut. See [the documentation](./README.md#lock-screen-shortcut) for more details.
