@@ -189,7 +189,7 @@ public class MainActivity extends Activity implements ServiceConnection, TorchSe
     public void onStopTrackingTouch(SeekBar seekBar) {}
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onCheckedChanged(@NonNull CompoundButton buttonView, boolean isChecked) {
         // On configuration change, this may be invoked before the service is bound.
         if (buttonView == binding.toggle && torchBinder != null) {
             if (isChecked) {
