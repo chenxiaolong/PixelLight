@@ -7,9 +7,9 @@
     to update the actual links at the bottom of the file.
 -->
 
-### Unreleased
+### Version 2.4
 
-* Update build script dependencies ([PR #16])
+* Update build script dependencies and target API 36 ([PR #16])
 
 ### Version 2.3
 
