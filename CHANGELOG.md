@@ -7,6 +7,10 @@
     to update the actual links at the bottom of the file.
 -->
 
+### Unreleased
+
+* Update build script dependencies ([PR #16])
+
 ### Version 2.3
 
 * Pretend to be a note-taking app ([Issue #12], [PR #15])
@@ -57,3 +61,4 @@
 [PR #13]: https://github.com/chenxiaolong/PixelLight/pull/13
 [PR #14]: https://github.com/chenxiaolong/PixelLight/pull/14
 [PR #15]: https://github.com/chenxiaolong/PixelLight/pull/15
+[PR #16]: https://github.com/chenxiaolong/PixelLight/pull/16
