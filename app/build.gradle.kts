@@ -157,6 +157,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
 }
 
 val archive = tasks.register("archive") {
