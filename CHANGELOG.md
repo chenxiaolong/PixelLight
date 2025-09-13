@@ -10,6 +10,7 @@
 ### Unreleased
 
 * Remove dependency info block from APK ([PR #17])
+* Update dependencies ([PR #18])
 
 ### Version 2.4
 
@@ -67,3 +68,4 @@
 [PR #15]: https://github.com/chenxiaolong/PixelLight/pull/15
 [PR #16]: https://github.com/chenxiaolong/PixelLight/pull/16
 [PR #17]: https://github.com/chenxiaolong/PixelLight/pull/17
+[PR #18]: https://github.com/chenxiaolong/PixelLight/pull/18
