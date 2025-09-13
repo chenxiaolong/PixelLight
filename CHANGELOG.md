@@ -7,7 +7,7 @@
     to update the actual links at the bottom of the file.
 -->
 
-### Unreleased
+### Version 2.5
 
 * Remove dependency info block from APK ([PR #17])
 * Update dependencies ([PR #18])
