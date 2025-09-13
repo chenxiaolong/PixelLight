@@ -7,6 +7,10 @@
     to update the actual links at the bottom of the file.
 -->
 
+### Unreleased
+
+* Remove dependency info block from APK ([PR #17])
+
 ### Version 2.4
 
 * Update build script dependencies and target API 36 ([PR #16])
@@ -62,3 +66,4 @@
 [PR #14]: https://github.com/chenxiaolong/PixelLight/pull/14
 [PR #15]: https://github.com/chenxiaolong/PixelLight/pull/15
 [PR #16]: https://github.com/chenxiaolong/PixelLight/pull/16
+[PR #17]: https://github.com/chenxiaolong/PixelLight/pull/17
