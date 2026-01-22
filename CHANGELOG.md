@@ -7,6 +7,10 @@
     to update the actual links at the bottom of the file.
 -->
 
+### Unreleased
+
+* Update AGP to 9.0.0 ([PR #19])
+
 ### Version 2.5
 
 * Remove dependency info block from APK ([PR #17])
@@ -69,3 +73,4 @@
 [PR #16]: https://github.com/chenxiaolong/PixelLight/pull/16
 [PR #17]: https://github.com/chenxiaolong/PixelLight/pull/17
 [PR #18]: https://github.com/chenxiaolong/PixelLight/pull/18
+[PR #19]: https://github.com/chenxiaolong/PixelLight/pull/19
