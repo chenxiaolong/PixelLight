@@ -10,7 +10,7 @@
 ### Unreleased
 
 * Update AGP to 9.0.0 ([PR #19])
-* Reenable default proguard optimizations ([PR #20])
+* Reenable default proguard optimizations ([PR #20], [PR #21])
   * For folks who want to decode stack traces from log files, the mapping files are now included with the official releases in `mappings.tar.zst`
 
 ### Version 2.5
@@ -77,3 +77,4 @@
 [PR #18]: https://github.com/chenxiaolong/PixelLight/pull/18
 [PR #19]: https://github.com/chenxiaolong/PixelLight/pull/19
 [PR #20]: https://github.com/chenxiaolong/PixelLight/pull/20
+[PR #21]: https://github.com/chenxiaolong/PixelLight/pull/21
