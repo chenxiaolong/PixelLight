@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2022-2024 Andrew Gunnerson
+ * SPDX-FileCopyrightText: 2022-2026 Andrew Gunnerson
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
@@ -38,6 +38,7 @@ public class Notifications {
                 context.getString(R.string.notification_channel_persistent_name),
                 NotificationManager.IMPORTANCE_LOW);
         channel.setDescription(context.getString(R.string.notification_channel_persistent_desc));
+        channel.setShowBadge(false);
         return channel;
     }
 
