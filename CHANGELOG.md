@@ -7,7 +7,7 @@
     to update the actual links at the bottom of the file.
 -->
 
-### Unreleased
+### Version 2.6
 
 * Disable badge (dot on launcher icon) for the persistent notification by default ([PR #22])
   * This only applies to new installs. For existing installs, this can be disabled from Android's notification settings for PixelLight's "Background services" notification channel.
