@@ -1,5 +1,5 @@
 [versions]
-android-gradle-plugin = "9.0.0"
+android-gradle-plugin = "9.0.1"
 jgit = "7.5.0.202512021534-r"
 
 [libraries]
