@@ -9,6 +9,8 @@
 
 ### Unreleased
 
+* Disable badge (dot on launcher icon) for the persistent notification by default ([PR #22])
+  * This only applies to new installs. For existing installs, this can be disabled from Android's notification settings for PixelLight's "Background services" notification channel.
 * Update AGP to 9.0.0 ([PR #19])
 * Reenable default proguard optimizations ([PR #20], [PR #21])
   * For folks who want to decode stack traces from log files, the mapping files are now included with the official releases in `mappings.tar.zst`
@@ -78,3 +80,4 @@
 [PR #19]: https://github.com/chenxiaolong/PixelLight/pull/19
 [PR #20]: https://github.com/chenxiaolong/PixelLight/pull/20
 [PR #21]: https://github.com/chenxiaolong/PixelLight/pull/21
+[PR #22]: https://github.com/chenxiaolong/PixelLight/pull/22
