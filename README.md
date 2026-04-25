@@ -2,9 +2,6 @@
 
 <img src="app/images/icon.svg" alt="app icon" width="72" />
 
-![latest release badge](https://img.shields.io/github/v/release/chenxiaolong/PixelLight?sort=semver)
-![license badge](https://img.shields.io/github/license/chenxiaolong/PixelLight)
-
 PixelLight is a bare-bones flashlight app for Google Pixel devices that can access higher brightness levels than what is typically allowed by the standard Android 13+ torch APIs.
 
 It allows access to the same brightness levels as Google Magnifier, except without the excessive 200% CPU usage due to constant camera processing. However, due to how the Pixel private API works, avoiding camera processing entirely is not possible. The CPU usage while the flashlight is on will generally hover around 25%.
@@ -133,4 +130,4 @@ However, aside from that, PixelLight will only ever support Google Pixel devices
 
 ## License
 
-PixelLight is licensed under GPLv3. Please see [`LICENSE`](./LICENSE) for the full license text.
+PixelLight is licensed under GPL-3.0-only. Please see [`LICENSE`](./LICENSE) for the full license text.
