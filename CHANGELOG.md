@@ -7,6 +7,10 @@
     to update the actual links at the bottom of the file.
 -->
 
+### Unreleased
+
+* Update target API version to API 37 (Android 17) ([PR #24])
+
 ### Version 2.6
 
 * Disable badge (dot on launcher icon) for the persistent notification by default ([PR #22])
@@ -82,3 +86,4 @@
 [PR #21]: https://github.com/chenxiaolong/PixelLight/pull/21
 [PR #22]: https://github.com/chenxiaolong/PixelLight/pull/22
 [PR #23]: https://github.com/chenxiaolong/PixelLight/pull/23
+[PR #24]: https://github.com/chenxiaolong/PixelLight/pull/24
