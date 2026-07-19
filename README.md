@@ -54,10 +54,12 @@ The `Note-taking` lock screen shortcut will now launch PixelLight.
 
 ### Override QR code scanner
 
-Run:
+**NOTE**: Android 16 [no longer grants `adb shell` the necessary permissions for this](https://android.googlesource.com/platform/frameworks/base/+/0eee1eddc401d365c76b4c21c6770b7735ecdefb%5E%21/), although it still works with root access. Unfortunately, if this config option was previously overridden on an unrooted device running Android <16, there is no way to undo that without a factory reset.
+
+Run from within a root shell:
 
 ```bash
-adb shell device_config override systemui default_qr_code_scanner com.chiller3.pixellight/.ToggleActivity
+device_config override systemui default_qr_code_scanner com.chiller3.pixellight/.ToggleActivity
 ```
 
 After rebooting, the QR code scanner lock screen shortcut and quick settings tile will toggle the flashlight instead of launching the system QR code scanner app.
@@ -65,7 +67,7 @@ After rebooting, the QR code scanner lock screen shortcut and quick settings til
 To change this setting back to the default, run:
 
 ```bash
-adb shell device_config clear_override systemui default_qr_code_scanner
+device_config clear_override systemui default_qr_code_scanner
 ```
 
 and reboot.
@@ -73,7 +75,7 @@ and reboot.
 The current setting can be found with:
 
 ```bash
-adb shell device_config get systemui default_qr_code_scanner
+device_config get systemui default_qr_code_scanner
 ```
 
 `null` means the QR code scanner is not overridden.
