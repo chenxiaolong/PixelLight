@@ -1,6 +1,6 @@
 [versions]
-android-gradle-plugin = "9.2.1"
-jgit = "7.7.0.202606012155-r"
+android-gradle-plugin = "9.3.1"
+jgit = "7.7.1.202607240634-r"
 
 [libraries]
 jgit = { group = "org.eclipse.jgit", name = "org.eclipse.jgit", version.ref = "jgit" }
