@@ -7,6 +7,10 @@
     to update the actual links at the bottom of the file.
 -->
 
+### Unreleased
+
+* Update dependencies ([PR #26])
+
 ### Version 2.7
 
 * Update target API version to API 37 (Android 17) ([PR #24])
@@ -87,3 +91,4 @@
 [PR #22]: https://github.com/chenxiaolong/PixelLight/pull/22
 [PR #23]: https://github.com/chenxiaolong/PixelLight/pull/23
 [PR #24]: https://github.com/chenxiaolong/PixelLight/pull/24
+[PR #26]: https://github.com/chenxiaolong/PixelLight/pull/26
