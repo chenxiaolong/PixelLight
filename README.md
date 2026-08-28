@@ -16,9 +16,7 @@ It allows access to the same brightness levels as Google Magnifier, except witho
 ## Limitations
 
 * Only supports Android 15+. For Android 12-14, use the old PixelLight 1.0 release, which has a better user experience due to fewer Android restrictions.
-* On Android 15, the quick settings panel will close when tapping the tile to turn on the flashlight. Additionally, on the lock screen, the background will turn black until the status bar is tapped. These issues are not fixable due to Android 15's new restrictions on starting foreground services.
-
-  However, if the "Keep service alive" option is enabled, then these issues only happens the first time the tile is toggled after a reboot. This keeps the foreground service running indefinitely, but does not impact battery life because the service is completely idle and not executing any code. The mandatory notification can be disabled from Android's settings if desired.
+* On Android 15+, the quick settings panel will close when tapping the tile to turn on the flashlight. However, if the "Keep service alive" option is enabled, then this only happens the first time the tile is toggled after a reboot. This keeps the foreground service running indefinitely, but does not impact battery life because the service is completely idle and not executing any code. The mandatory notification can be disabled from Android's settings if desired.
 
 ## Permissions
 
