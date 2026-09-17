@@ -108,6 +108,8 @@ Then, check that the SHA-256 digest of the APK signing certificate is:
 03a9ed333be772cf612af84fc4bf2cc95428ff5a10c057d3b60d86b0f8fec2c3
 ```
 
+Alternatively, if `apksigner` is not installed, the APK files can be verified against the external `.apk.sig` SSH signatures using [the steps here](https://github.com/chenxiaolong/chenxiaolong/blob/master/VERIFY_SSH_SIGNATURES.md).
+
 ## Building from source
 
 PixelLight can be built like most other Android apps using Android Studio or the gradle command line.
