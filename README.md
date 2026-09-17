@@ -78,6 +78,20 @@ device_config get systemui default_qr_code_scanner
 
 `null` means the QR code scanner is not overridden.
 
+## Persistent notification
+
+Android 14 and newer [no longer allow](https://developer.android.com/about/versions/14/behavior-changes-all#non-dismissable-notifications) regular apps to prevent persistent notifications from being dismissed. To work around this, PixelLight will automatically show the persistent notification again whenever it is dismissed.
+
+To prevent the notification from being dismissible in the first place (eliminating the UI jank from reshowing the notification), use adb to grant the `SYSTEM_EXEMPT_FROM_DISMISSIBLE_NOTIFICATIONS` appops permission:
+
+```bash
+adb shell appops set com.chiller3.pixellight SYSTEM_EXEMPT_FROM_DISMISSIBLE_NOTIFICATIONS allow
+# To undo the change, change "allow" to "default".
+```
+
+Also, if the persistent notification is not desired, it can be disabled from Android's settings by turning off the two "Background services" notification channels for PixelLight. Syncthing will continue to run as normal even if the notification is not visible as long as the overall notification permission is still granted.
+
+
 ## Verifying digital signatures
 
 First, use `apksigner` to print the digests of the APK signing certificate:

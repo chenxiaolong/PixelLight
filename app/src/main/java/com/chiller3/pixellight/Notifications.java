@@ -78,6 +78,11 @@ public class Notifications {
                     null, context.getString(pair.first), actionPendingIntent).build());
         }
 
+        final var onDismissIntent = TorchService.createPersistIntent(context);
+        final var onDismissPendingIntent = PendingIntent.getService(context, 0,
+                onDismissIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setDeleteIntent(onDismissPendingIntent);
+
         // Inhibit 10-second delay when showing persistent notification.
         builder.setForegroundServiceBehavior(Notification.FOREGROUND_SERVICE_IMMEDIATE);
 

@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2024 Andrew Gunnerson
+ * SPDX-FileCopyrightText: 2024-2026 Andrew Gunnerson
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
@@ -151,16 +151,16 @@ public class TorchSession {
     }
 
     private void notifyOwnerNeeded() {
-        Log.d(TAG, "Notifying primary owner that foreground mode is needed");
-        serviceOwner.onTorchOwnerNeeded(true, state != State.OFF);
+        Log.d(TAG, "Notifying owner that foreground mode is needed");
+        serviceOwner.onTorchOwnerNeeded(true);
     }
 
     private void tryNotifyOwnerNotNeeded() {
         if (isOwnerNeeded()) {
             Log.d(TAG, "Foreground mode is still needed: state=" + state);
         } else {
-            Log.d(TAG, "Notifying primary owner that foreground mode is not needed");
-            serviceOwner.onTorchOwnerNeeded(false, false);
+            Log.d(TAG, "Notifying owner that foreground mode is not needed");
+            serviceOwner.onTorchOwnerNeeded(false);
         }
     }
 
@@ -406,6 +406,6 @@ public class TorchSession {
 
     public interface ServiceOwner {
         @MainThread
-        void onTorchOwnerNeeded(boolean needService, boolean needForeground);
+        void onTorchOwnerNeeded(boolean needed);
     }
 }

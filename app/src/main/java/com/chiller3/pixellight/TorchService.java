@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2024-2025 Andrew Gunnerson
+ * SPDX-FileCopyrightText: 2024-2026 Andrew Gunnerson
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
@@ -36,7 +36,6 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
     private Preferences prefs;
     private Notifications notifications;
     private int curBrightness = -1;
-    private boolean initialUpdate = true;
     private boolean foreground = false;
 
     public static @NonNull Intent createSetBrightnessIntent(
@@ -50,7 +49,7 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
         return intent;
     }
 
-    private static @NonNull Intent createPersistIntent(@NonNull Context context) {
+    public static @NonNull Intent createPersistIntent(@NonNull Context context) {
         final var intent = new Intent(context, TorchService.class);
         intent.setAction(ACTION_PERSIST);
         return intent;
@@ -97,6 +96,7 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
             session.setTorchBrightness(brightness);
         } else if (ACTION_PERSIST.equals(action)) {
             Log.d(TAG, "Keeping service alive");
+            updateForegroundNotification();
         } else {
             Log.w(TAG, "Invalid intent: " + intent);
             tryStopService();
@@ -106,6 +106,8 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
     }
 
     private void updateForegroundNotification() {
+        Log.d(TAG, "Updating foreground notification");
+
         // If we're here, then we're the service owner. Thus, if we don't have the initial state
         // yet, we can still assume that the torch is off.
         final var message = curBrightness > 0
@@ -144,15 +146,10 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
     }
 
     @Override
-    public void onTorchOwnerNeeded(boolean needService, boolean needForeground) {
-        if (needService) {
+    public void onTorchOwnerNeeded(boolean needed) {
+        if (needed) {
             Log.d(TAG, "Starting service to keep it alive");
-            startService(createPersistIntent(this));
-
-            if (needForeground) {
-                Log.d(TAG, "Moving service to foreground for camera access");
-                updateForegroundNotification();
-            }
+            startForegroundService(createPersistIntent(this));
         } else {
             tryStopService();
         }
@@ -162,9 +159,7 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
     public void onTorchStateChanged(int curBrightness, int maxBrightness) {
         this.curBrightness = curBrightness;
 
-        if (initialUpdate) {
-            initialUpdate = false;
-        } else {
+        if (foreground) {
             updateForegroundNotification();
         }
     }
