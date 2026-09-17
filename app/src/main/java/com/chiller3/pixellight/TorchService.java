@@ -13,13 +13,10 @@ import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
-import android.util.Pair;
 
 import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import java.util.Collections;
 
 /** Service for managing the torch state that can be bound. */
 public class TorchService extends Service implements TorchSession.ServiceOwner, TorchSession.Listener {
@@ -36,6 +33,7 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
     private Preferences prefs;
     private Notifications notifications;
     private int curBrightness = -1;
+    private int maxBrightness = -1;
     private boolean foreground = false;
 
     public static @NonNull Intent createSetBrightnessIntent(
@@ -108,18 +106,8 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
     private void updateForegroundNotification() {
         Log.d(TAG, "Updating foreground notification");
 
-        // If we're here, then we're the service owner. Thus, if we don't have the initial state
-        // yet, we can still assume that the torch is off.
-        final var message = curBrightness > 0
-                ? R.string.notification_persistent_torch_on
-                : R.string.notification_persistent_torch_off;
-        final var actionText = curBrightness > 0
-                ? R.string.notification_action_turn_off
-                : R.string.notification_action_turn_on;
-        final var actionBrightness = curBrightness > 0 ? 0 : TorchSession.BRIGHTNESS_PERSISTED;
-        final var actionIntent = createSetBrightnessIntent(this, actionBrightness);
         final var notification = notifications.createPersistentNotification(
-                message, Collections.singletonList(new Pair<>(actionText, actionIntent)));
+                curBrightness, maxBrightness);
         final var type = ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA;
         startForeground(Notifications.ID_PERSISTENT, notification, type);
 
@@ -158,6 +146,7 @@ public class TorchService extends Service implements TorchSession.ServiceOwner, 
     @Override
     public void onTorchStateChanged(int curBrightness, int maxBrightness) {
         this.curBrightness = curBrightness;
+        this.maxBrightness = maxBrightness;
 
         if (foreground) {
             updateForegroundNotification();

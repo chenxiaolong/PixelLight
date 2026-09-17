@@ -32,10 +32,12 @@ An external app can change the flashlight state by launching PixelLight's `Toggl
 
 This activity accepts an optional integer parameter named `brightness`:
 
-* If the value is -2, the flashlight is toggled between on (at the user's saved brightness) and off. This is the default behavior when the parameter is not specified.
-* If the value is -1, the flashlight is turned on at the user's saved brightness.
-* If the value is 0, the flashlight is turned off.
-* If the value is positive, the flashlight is turned on at the specified brightness. If the value is out of range, it is automatically clamped to the maximum brightness. This does not change the user's brightness preference.
+* `== -4`: Decrease the brightness by an unspecified incremental amount (clamped to minimum brightness). This has no effect when turned off.
+* `== -3`: Increase the brightness by an unspecified incremental amount (clamped to maximum brightness). This has no effect when turned off.
+* `== -2`: Toggle between on (at the user's saved brightness) and off. This is the default behavior when the parameter is not specified.
+* `== -1`: Turned on at the user's saved brightness.
+* `== 0`: Turn off.
+* `> 0`: Set to specific brightness (clamped to maximum brightness). This changes the saved brightness.
 * If the value is anything else, the intent is ignored.
 
 ## Lock screen shortcut

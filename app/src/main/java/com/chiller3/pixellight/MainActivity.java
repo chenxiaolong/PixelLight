@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2024 Andrew Gunnerson
+ * SPDX-FileCopyrightText: 2024-2026 Andrew Gunnerson
  * SPDX-License-Identifier: GPL-3.0-only
  */
 
@@ -178,7 +178,6 @@ public class MainActivity extends Activity implements ServiceConnection, TorchSe
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (seekBar == binding.brightness && fromUser) {
             torchBinder.setTorchBrightness(progress);
-            prefs.setBrightness(progress);
         }
     }
 

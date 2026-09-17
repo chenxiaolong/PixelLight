@@ -11,13 +11,11 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class Notifications {
     public static final String CHANNEL_ID_PERSISTENT = "persistent";
@@ -57,11 +55,25 @@ public class Notifications {
         ));
     }
 
-    public Notification createPersistentNotification(@StringRes int titleResId,
-                                                     List<Pair<Integer, Intent>> actions) {
+    private @NonNull Notification.Action createBrightnessAction(
+            @StringRes int textResId, int brightness) {
+        final var intent = TorchService.createSetBrightnessIntent(context, brightness);
+        final var pendingIntent = PendingIntent.getService(context, 0, intent,
+                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT
+                | PendingIntent.FLAG_ONE_SHOT);
+
+        return new Notification.Action.Builder(null, context.getString(textResId), pendingIntent)
+                .build();
+    }
+
+    public Notification createPersistentNotification(int curBrightness, int maxBrightness) {
         final var notificationIntent = new Intent(context, MainActivity.class);
         final var pendingIntent = PendingIntent.getActivity(
                 context, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
+
+        final var titleResId = curBrightness > 0
+                ? R.string.notification_persistent_torch_on
+                : R.string.notification_persistent_torch_off;
 
         final var builder = new Notification.Builder(context, CHANNEL_ID_PERSISTENT);
         builder.setContentTitle(context.getText(titleResId));
@@ -70,12 +82,26 @@ public class Notifications {
         builder.setOngoing(true);
         builder.setOnlyAlertOnce(true);
 
-        for (final var pair : actions) {
-            final var actionPendingIntent = PendingIntent.getService(context, 0, pair.second,
-                    PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT
-                            | PendingIntent.FLAG_ONE_SHOT);
-            builder.addAction(new Notification.Action.Builder(
-                    null, context.getString(pair.first), actionPendingIntent).build());
+        if (curBrightness > 0) {
+            builder.setContentText(curBrightness + " / " + maxBrightness);
+            builder.setProgress(maxBrightness, curBrightness, false);
+        }
+
+        final var toggleResId = curBrightness > 0
+                ? R.string.notification_action_turn_off
+                : R.string.notification_action_turn_on;
+        final var toggleBrightness = curBrightness > 0 ? 0 : TorchSession.BRIGHTNESS_PERSISTED;
+        builder.addAction(createBrightnessAction(toggleResId, toggleBrightness));
+
+        if (curBrightness > 0) {
+            if (curBrightness > 1) {
+                builder.addAction(createBrightnessAction(R.string.notification_action_decrease,
+                        TorchSession.BRIGHTNESS_DECREASE));
+            }
+            if (curBrightness < maxBrightness) {
+                builder.addAction(createBrightnessAction(R.string.notification_action_increase,
+                        TorchSession.BRIGHTNESS_INCREASE));
+            }
         }
 
         final var onDismissIntent = TorchService.createPersistIntent(context);

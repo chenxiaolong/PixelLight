@@ -42,6 +42,10 @@ public class TorchSession {
 
     private static final String TAG = TorchSession.class.getSimpleName();
 
+    private static final int STEP_SIZE = 16;
+
+    public static final int BRIGHTNESS_DECREASE = -4;
+    public static final int BRIGHTNESS_INCREASE = -3;
     public static final int BRIGHTNESS_TOGGLE = -2;
     public static final int BRIGHTNESS_PERSISTED = -1;
 
@@ -224,6 +228,20 @@ public class TorchSession {
                     desiredBrightness = 0;
                     break;
             }
+        } else if (brightness == BRIGHTNESS_INCREASE) {
+            if (curBrightness > 0) {
+                desiredBrightness = Math.min(curBrightness + STEP_SIZE, maxBrightness);
+            } else {
+                Log.w(TAG, "Ignoring increase when turned off");
+                return;
+            }
+        } else if (brightness == BRIGHTNESS_DECREASE) {
+            if (curBrightness > 0) {
+                desiredBrightness = Math.max(curBrightness - STEP_SIZE, 1);
+            } else {
+                Log.w(TAG, "Ignoring decrease when turned off");
+                return;
+            }
         } else {
             Log.w(TAG, "Ignoring invalid brightness value: " + brightness);
             return;
@@ -234,6 +252,8 @@ public class TorchSession {
         if (desiredBrightness == 0) {
             closeCamera();
             return;
+        } else {
+            prefs.setBrightness(desiredBrightness);
         }
 
         switch (state) {

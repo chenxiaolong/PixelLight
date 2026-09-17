@@ -16,6 +16,8 @@
     <string name="notification_persistent_torch_off">Flashlight is off</string>
     <string name="notification_action_turn_on">Turn on</string>
     <string name="notification_action_turn_off">Turn off</string>
+    <string name="notification_action_increase">↑↑↑</string>
+    <string name="notification_action_decrease">↓↓↓</string>
     <string name="notification_error_no_permission">Camera permission is required</string>
     <string name="notification_error_blocked_by_policy">Camera access is blocked by device policy</string>
     <string name="notification_error_disconnected">Camera disconnected</string>
