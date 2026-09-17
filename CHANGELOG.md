@@ -9,6 +9,8 @@
 
 ### Unreleased
 
+* Resend persistent notification if it is inadvertently dismissed ([Issue #27], [PR #28])
+  * Folks who prefer to have no notification can still disable it from Android's settings.
 * Update dependencies ([PR #26])
 
 ### Version 2.7
@@ -70,6 +72,7 @@
 [Issue #3]: https://github.com/chenxiaolong/PixelLight/issues/3
 [Issue #9]: https://github.com/chenxiaolong/PixelLight/issues/9
 [Issue #12]: https://github.com/chenxiaolong/PixelLight/issues/12
+[Issue #27]: https://github.com/chenxiaolong/PixelLight/issues/27
 [PR #1]: https://github.com/chenxiaolong/PixelLight/pull/1
 [PR #2]: https://github.com/chenxiaolong/PixelLight/pull/2
 [PR #4]: https://github.com/chenxiaolong/PixelLight/pull/4
@@ -92,3 +95,4 @@
 [PR #23]: https://github.com/chenxiaolong/PixelLight/pull/23
 [PR #24]: https://github.com/chenxiaolong/PixelLight/pull/24
 [PR #26]: https://github.com/chenxiaolong/PixelLight/pull/26
+[PR #28]: https://github.com/chenxiaolong/PixelLight/pull/28
