@@ -68,8 +68,10 @@ public class Notifications {
 
     public Notification createPersistentNotification(int curBrightness, int maxBrightness) {
         final var notificationIntent = new Intent(context, MainActivity.class);
-        final var pendingIntent = PendingIntent.getActivity(
-                context, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
+        notificationIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
+                | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        final var pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent,
+                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 
         final var titleResId = curBrightness > 0
                 ? R.string.notification_persistent_torch_on
