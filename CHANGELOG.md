@@ -12,6 +12,7 @@
 * Resend persistent notification if it is inadvertently dismissed ([Issue #27], [PR #28])
   * Folks who prefer to have no notification can still disable it from Android's settings.
 * Show brightness intensity in notification and add buttons for changing it ([Issue #27], [PR #29])
+* Fix duplicate activity spawning when tapping the notification ([PR #30])
 * Update dependencies ([PR #26])
 
 ### Version 2.7
@@ -98,3 +99,4 @@
 [PR #26]: https://github.com/chenxiaolong/PixelLight/pull/26
 [PR #28]: https://github.com/chenxiaolong/PixelLight/pull/28
 [PR #29]: https://github.com/chenxiaolong/PixelLight/pull/29
+[PR #30]: https://github.com/chenxiaolong/PixelLight/pull/30
