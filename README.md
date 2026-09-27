@@ -142,6 +142,8 @@ and then build the release APK:
 
 ## Contributing
 
+([AI policy](https://github.com/chenxiaolong/chenxiaolong/blob/master/AI_POLICY.md))
+
 Bug fix and translation pull requests are welcome and much appreciated!
 
 However, aside from that, PixelLight will only ever support Google Pixel devices and is intentionally featureless. I am unlikely to implement any new features.
